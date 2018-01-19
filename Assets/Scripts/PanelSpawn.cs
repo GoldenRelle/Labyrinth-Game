@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PanelSpawn : MonoBehaviour {
 
@@ -79,9 +78,6 @@ public class PanelSpawn : MonoBehaviour {
 				spawnSame ();
 			}
 			//ensureSafePassage ();
-		} else if (c.tag == "Player") {
-			if (edgeType == "end")
-				SceneManager.LoadScene ("Win Screen");
 		}
 	}
 
@@ -137,6 +133,9 @@ public class PanelSpawn : MonoBehaviour {
 	}
 
 	void spawnWalls(int roll){
+		if (stageManager.GetComponent<StageManager>().getLooping() != false && edgeType == "edge") {
+			roll = 15;
+		}
 		switch (roll) {
 		case 0:
 			walls[north].SetActive (false);
@@ -227,6 +226,12 @@ public class PanelSpawn : MonoBehaviour {
 			walls[south].SetActive (false);
 			walls[east].SetActive (false);
 			walls[west].SetActive (false);
+			break;
+		case 15:
+			walls[north].SetActive (true);
+			walls[south].SetActive (true);
+			walls[east].SetActive (true);
+			walls[west].SetActive (true);
 			break;
 		default:
 			walls[north].SetActive (false);

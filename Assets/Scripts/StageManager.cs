@@ -6,17 +6,25 @@ public class StageManager : MonoBehaviour {
 
 	private int level;
 	private int bounds;
+	private bool isLooping;
 	private GameObject[,] stage;
 	public GameObject Panel;
+	public GameObject Key;
+	public GameObject Exit;
 	public GameObject[] characters;
 
 	// Use this for initialization
 	void Start () {
+		isLooping = false;
 		level = 1;
 		bounds = 3 + level * 2 + 4;
 		stage = new GameObject[bounds, bounds];
-		makeLevel();
-		assignSamePanels ();
+		makeLevel ();
+		if (isLooping) {
+			assignSamePanels ();
+		} else {
+			assignEdges ();
+		}
 		assignNeighbours ();
 		assignStartEnd ();
 	}
@@ -201,6 +209,16 @@ public class StageManager : MonoBehaviour {
 		}
 	}
 
+	void assignEdges() {
+		for (int i = 0; i < bounds - 1; i++) {
+			for (int j = 0; j < bounds - 1; j++) {
+				if (i == 0 || i == bounds || j == 0 || j == bounds) {
+					stage [i, j].GetComponent<PanelSpawn> ().setEdgeType("edge");
+				}
+			}
+		}
+	}
+
 	void assignStartEnd () {
 		int si = Random.Range (2, (bounds - 3));
 		int sj = Random.Range (2, (bounds - 3));
@@ -215,6 +233,12 @@ public class StageManager : MonoBehaviour {
 		stage [si, sj].GetComponent<PanelSpawn>().setStart (true);
 		Vector3 startPos = new Vector3(stage[si, sj].transform.position.x, 0.5f, stage[si, sj].transform.position.z);
 		transform.GetChild(0).position = startPos;
-		stage [ei, ej].GetComponent<PanelSpawn> ().setEdgeType ("end");
+		GameObject exitInstance = (GameObject)Instantiate (Exit, stage [ei, ej].transform);
+		//Exit.transform.position.y += 0.5f;
+		//stage [ei, ej].GetComponent<PanelSpawn> ().setEdgeType ("end");
+	}
+
+	public bool getLooping() {
+		return isLooping;
 	}
 }

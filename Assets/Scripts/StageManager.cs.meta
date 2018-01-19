@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: eca3ddad91d06024fb30a43519482616
-timeCreated: 1505146928
+timeCreated: 1512392371
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Panel: {fileID: 1098042532499030, guid: 47f586eb7c61c0b478fc31a37d14b102, type: 2}
+  - Key: {instanceID: 0}
+  - Exit: {fileID: 1742266522416374, guid: fa615896a12cdad4e8969008ce64280a, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

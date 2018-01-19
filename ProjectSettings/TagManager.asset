@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Panel
   - LoS
+  - End
+  - Key
+  - Red Opponent
+  - Blue Opponent
+  - Green Opponent
   layers:
   - Default
   - TransparentFX
